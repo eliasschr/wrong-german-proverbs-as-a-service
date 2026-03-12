@@ -6,14 +6,15 @@ const fs = require('fs');
 const app = express();
 app.use(cors());
 app.set('trust proxy', true);
+
 const PORT = process.env.PORT || 3000;
+const API_VERSION = '1.2.0';
 
 // Load proverbs from JSON
 const proverbs = JSON.parse(fs.readFileSync('./proverbs.json', 'utf-8'));
 
-// Rate limiter: 120 requests per minute per IP
 const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
+  windowMs: 60 * 1000,
   max: 120,
   keyGenerator: (req) => {
     return req.headers['cf-connecting-ip'] || req.ip; // Fallback if header missing (or for non-CF)
@@ -36,7 +37,6 @@ app.get('/get', (req, res) => {
   res.json({ proverb });
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Wrong-german-proverbs is running on port ${PORT}`);
 });
