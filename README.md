@@ -30,7 +30,7 @@ Built for humans, germans, excuses, and humor.
 
 **Base URL**
 ```
-https://<your-render-service>.onrender.com
+https://wrong-german-proverbs-as-a-service.onrender.com/get
 ```
 
 **Method:** `GET`  
