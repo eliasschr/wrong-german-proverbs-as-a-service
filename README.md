@@ -1,14 +1,16 @@
-# ❌ No-as-a-Service
+# ❌ Wrong-German-Proverbs-as-a-service
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/hotheadhacker/no-as-a-service/main/assets/imgs/naas-with-no-logo-bunny.png" width="800" alt="No-as-a-Service Banner" width="70%"/>
 </p>
 
 
-Ever needed a graceful way to say “no”?  
-This tiny API returns random, generic, creative, and sometimes hilarious rejection reasons — perfectly suited for any scenario: personal, professional, student life, dev life, or just because.
+Ever needed a Wrong German Proverb?
+No? 
+Same. But here you have it anyway.
+This tiny API returns random, generic, creative, and sometimes hilarious German proverbs — perfectly suited for No scenario: not personal, not professional, student life(maybe), dev life(hell no), or just because.
 
-Built for humans, excuses, and humor.
+Built for humans, germans, excuses, and humor.
 
 <!-- GitAds Sponsorship Badge -->
 <p align="center">
