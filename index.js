@@ -24,7 +24,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Random rejection reason endpoint
-app.get('/Wgpaas', (req, res) => {
+app.get('/get', (req, res) => {
   const reason = reasons[Math.floor(Math.random() * reasons.length)];
   res.json({ reason });
 });
