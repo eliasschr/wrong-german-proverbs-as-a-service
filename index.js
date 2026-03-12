@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require("cors");
+const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs');
 
@@ -8,25 +8,32 @@ app.use(cors());
 app.set('trust proxy', true);
 const PORT = process.env.PORT || 3000;
 
-// Load reasons from JSON
+// Load proverbs from JSON
 const proverbs = JSON.parse(fs.readFileSync('./proverbs.json', 'utf-8'));
 
 // Rate limiter: 120 requests per minute per IP
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
   max: 120,
-  keyGenerator: (req, res) => {
+  keyGenerator: (req) => {
     return req.headers['cf-connecting-ip'] || req.ip; // Fallback if header missing (or for non-CF)
   },
-  message: { error: "Too many requests, please try again later. (120 reqs/min/IP)" }
+  message: { error: 'Too many requests, please try again later. (120 reqs/min/IP)' }
 });
 
 app.use(limiter);
 
-// Random rejection reason endpoint
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Wrong German Proverbs API is running.',
+    endpoint: '/get'
+  });
+});
+
+// Random wrong proverb endpoint
 app.get('/get', (req, res) => {
-  const reason = reasons[Math.floor(Math.random() * reasons.length)];
-  res.json({ reason });
+  const proverb = proverbs[Math.floor(Math.random() * proverbs.length)];
+  res.json({ proverb });
 });
 
 // Start server
