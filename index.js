@@ -1,35 +1,67 @@
 const express = require('express');
-const cors = require("cors");
+const cors = require('cors');
+const path = require('path');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs');
 
 const app = express();
 app.use(cors());
 app.set('trust proxy', true);
+
 const PORT = process.env.PORT || 3000;
+const API_VERSION = '1.3.0';
 
-// Load reasons from JSON
-const proverbs = JSON.parse(fs.readFileSync('./proverbs.json', 'utf-8'));
+let proverbs = [];
+try {
+  proverbs = JSON.parse(fs.readFileSync('./proverbs.json', 'utf-8'));
+  if (!Array.isArray(proverbs) || proverbs.length === 0) {
+    throw new Error('proverbs.json must contain a non-empty array');
+  }
+} catch (error) {
+  console.error(`Failed to load proverbs.json: ${error.message}`);
+  process.exit(1);
+}
 
-// Rate limiter: 120 requests per minute per IP
 const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
+  windowMs: 60 * 1000,
   max: 120,
-  keyGenerator: (req, res) => {
-    return req.headers['cf-connecting-ip'] || req.ip; // Fallback if header missing (or for non-CF)
-  },
-  message: { error: "Too many requests, please try again later. (120 reqs/min/IP)" }
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) => req.headers['cf-connecting-ip'] || req.ip,
+  message: { error: 'Too many requests, please try again later. (120 reqs/min/IP)' }
 });
 
 app.use(limiter);
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// Random rejection reason endpoint
-app.get('/get', (req, res) => {
-  const reason = reasons[Math.floor(Math.random() * reasons.length)];
-  res.json({ reason });
+const getRandomProverb = () => {
+  return proverbs[Math.floor(Math.random() * proverbs.length)];
+};
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Start server
+app.get('/api', (req, res) => {
+  res.json({
+    message: 'Wrong German Proverbs API is running.',
+    version: API_VERSION,
+    endpoints: ['/', '/api', '/healthz', '/get', '/no']
+  });
+});
+
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+app.get('/get', (req, res) => {
+  res.json({ proverb: getRandomProverb() });
+});
+
+app.get('/no', (req, res) => {
+  res.json({ proverb: getRandomProverb() });
+});
+
 app.listen(PORT, () => {
   console.log(`Wrong-german-proverbs is running on port ${PORT}`);
 });

@@ -30,21 +30,28 @@ Built for humans, germans, excuses, and humor.
 
 **Base URL**
 ```
-https://naas.isalman.dev/no
+https://<your-render-service>.onrender.com
 ```
 
 **Method:** `GET`  
 **Rate Limit:** `120 requests per minute per IP`
 
+### Endpoints
+- `GET /` → schöne Landing-Page im Browser
+- `GET /api` → API info (JSON)
+- `GET /healthz` → health check
+- `GET /get` → random wrong proverb (bevorzugt)
+- `GET /no` → kompatibler Legacy-Endpoint
+
 ### 🔄 Example Request
 ```http
-GET /no
+GET /get
 ```
 
 ### ✅ Example Response
 ```json
 {
-  "reason": "This feels like something Future Me would yell at Present Me for agreeing to."
+  "proverb": "Alles kann, Nussmix."
 }
 ```
 
@@ -74,8 +81,9 @@ npm start
 
 The API will be live at:
 ```
-http://localhost:3000/no
+http://localhost:3000 (Landing Page)
 ```
+API direkt: `http://localhost:3000/get` (oder legacy `http://localhost:3000/no`)
 
 You can also change the port using an environment variable:
 ```bash
@@ -87,11 +95,12 @@ PORT=5000 npm start
 ## 📁 Project Structure
 
 ```
-no-as-service/
-├── index.js            # Express API
-├── reasons.json        # 1000+ universal rejection reasons
+wrong-german-proverbs-as-a-service/
+├── index.js
+├── proverbs.json
 ├── package.json
-├── .devcontainer.json  # VS Code / Github devcontainer setup
+├── scripts/
+│   └── smoke-test.sh
 └── README.md
 ```
 
