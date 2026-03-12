@@ -4,7 +4,8 @@
   "description": "A lightweight API that returns random wrong german proverbs.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test:smoke": "./scripts/smoke-test.sh"
   },
   "author": "eliasschr",
   "license": "MIT",

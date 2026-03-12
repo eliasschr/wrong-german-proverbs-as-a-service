@@ -30,21 +30,26 @@ Built for humans, germans, excuses, and humor.
 
 **Base URL**
 ```
-https://naas.isalman.dev/no
+https://<your-render-service>.onrender.com
 ```
 
 **Method:** `GET`  
 **Rate Limit:** `120 requests per minute per IP`
 
+### Endpoints
+- `GET /` → API info
+- `GET /healthz` → health check
+- `GET /get` → random wrong proverb
+
 ### 🔄 Example Request
 ```http
-GET /no
+GET /get
 ```
 
 ### ✅ Example Response
 ```json
 {
-  "reason": "This feels like something Future Me would yell at Present Me for agreeing to."
+  "proverb": "Alles kann, Nussmix."
 }
 ```
 
