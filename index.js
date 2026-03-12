@@ -9,7 +9,7 @@ app.set('trust proxy', true);
 const PORT = process.env.PORT || 3000;
 
 // Load reasons from JSON
-const reasons = JSON.parse(fs.readFileSync('./reasons.json', 'utf-8'));
+const proverbs = JSON.parse(fs.readFileSync('./proverbs.json', 'utf-8'));
 
 // Rate limiter: 120 requests per minute per IP
 const limiter = rateLimit({
@@ -24,12 +24,12 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Random rejection reason endpoint
-app.get('/no', (req, res) => {
+app.get('/Wgpaas', (req, res) => {
   const reason = reasons[Math.floor(Math.random() * reasons.length)];
   res.json({ reason });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`No-as-a-Service is running on port ${PORT}`);
+  console.log(`Wrong-german-proverbs is running on port ${PORT}`);
 });
