@@ -73,6 +73,14 @@ PORT=5000 npm start
 npm run test:smoke
 ```
 
+## ☁️ Render-Hinweis
+
+Wenn du auf Render deployst, setze den **Health Check Path** auf:
+
+```txt
+/healthz
+```
+
 ## 📁 Projektstruktur
 
 ```txt
