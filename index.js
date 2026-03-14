@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs');
 
@@ -9,25 +8,17 @@ app.use(cors());
 app.set('trust proxy', true);
 
 const PORT = process.env.PORT || 3000;
-const API_VERSION = '1.3.0';
+const API_VERSION = '1.2.0';
 
-let proverbs = [];
-try {
-  proverbs = JSON.parse(fs.readFileSync('./proverbs.json', 'utf-8'));
-  if (!Array.isArray(proverbs) || proverbs.length === 0) {
-    throw new Error('proverbs.json must contain a non-empty array');
-  }
-} catch (error) {
-  console.error(`Failed to load proverbs.json: ${error.message}`);
-  process.exit(1);
-}
+// Load proverbs from JSON
+const proverbs = JSON.parse(fs.readFileSync('./proverbs.json', 'utf-8'));
 
 const limiter = rateLimit({
   windowMs: 60 * 1000,
   max: 120,
-  standardHeaders: true,
-  legacyHeaders: false,
-  keyGenerator: (req) => req.headers['cf-connecting-ip'] || req.ip,
+  keyGenerator: (req) => {
+    return req.headers['cf-connecting-ip'] || req.ip; // Fallback if header missing (or for non-CF)
+  },
   message: { error: 'Too many requests, please try again later. (120 reqs/min/IP)' }
 });
 
@@ -54,12 +45,17 @@ app.get('/healthz', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-app.get('/get', (req, res) => {
-  res.json({ proverb: getRandomProverb() });
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Wrong German Proverbs API is running.',
+    endpoint: '/get'
+  });
 });
 
-app.get('/no', (req, res) => {
-  res.json({ proverb: getRandomProverb() });
+// Random wrong proverb endpoint
+app.get('/get', (req, res) => {
+  const proverb = proverbs[Math.floor(Math.random() * proverbs.length)];
+  res.json({ proverb });
 });
 
 app.listen(PORT, () => {

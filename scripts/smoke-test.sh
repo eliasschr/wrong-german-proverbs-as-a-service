@@ -27,7 +27,6 @@ for _ in {1..30}; do
 done
 
 curl -fsS "http://127.0.0.1:${PORT}/" >/dev/null
-curl -fsS "http://127.0.0.1:${PORT}/api" >/dev/null
 curl -fsS "http://127.0.0.1:${PORT}/healthz" >/dev/null
 curl -fsS "http://127.0.0.1:${PORT}/get" >/dev/null
 curl -fsS "http://127.0.0.1:${PORT}/no" >/dev/null

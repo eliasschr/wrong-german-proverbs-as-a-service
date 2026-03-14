@@ -30,15 +30,14 @@ Built for humans, germans, excuses, and humor.
 
 **Base URL**
 ```
-https://<your-render-service>.onrender.com
+https://wrong-german-proverbs-as-a-service.onrender.com/get
 ```
 
 **Method:** `GET`  
 **Rate Limit:** `120 requests per minute per IP`
 
 ### Endpoints
-- `GET /` → schöne Landing-Page im Browser
-- `GET /api` → API info (JSON)
+- `GET /` → API info
 - `GET /healthz` → health check
 - `GET /get` → random wrong proverb (bevorzugt)
 - `GET /no` → kompatibler Legacy-Endpoint
@@ -81,9 +80,9 @@ npm start
 
 The API will be live at:
 ```
-http://localhost:3000 (Landing Page)
+http://localhost:3000/get
 ```
-API direkt: `http://localhost:3000/get` (oder legacy `http://localhost:3000/no`)
+(Alternativ weiterhin kompatibel: `http://localhost:3000/no`)
 
 You can also change the port using an environment variable:
 ```bash
