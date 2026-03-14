@@ -23,6 +23,27 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+const getRandomProverb = () => {
+  return proverbs[Math.floor(Math.random() * proverbs.length)];
+};
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/api', (req, res) => {
+  res.json({
+    message: 'Wrong German Proverbs API is running.',
+    version: API_VERSION,
+    endpoints: ['/', '/api', '/healthz', '/get', '/no']
+  });
+});
+
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 app.get('/', (req, res) => {
   res.json({
