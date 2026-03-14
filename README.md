@@ -2,6 +2,10 @@
 
 ![Wrong German Proverbs Banner](assets/imgs/IMG_4152.JPG)
 
+<!-- GitAds-Verify:
+1P9IIML4SQMO5XKC53C6UAU9ZKAVB943
+-->
+
 Eine kleine API, die zufällige, absichtlich falsche deutsche Sprichwörter zurückgibt.
 
 ## 🚀 API
