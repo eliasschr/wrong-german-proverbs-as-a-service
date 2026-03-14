@@ -4,6 +4,9 @@
 
 <!-- GitAds-Verify: 69PXW7NERTRSAFEOI7BXZRPOA28PHGXW -->
 
+## GitAds Sponsored
+[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=eliasschr/wrong-german-proverbs-as-a-service@github)](https://gitads.dev/v1/ad-track?source=eliasschr/wrong-german-proverbs-as-a-service@github)
+
 Eine kleine API, die zufällige, absichtlich falsche deutsche Sprichwörter zurückgibt.
 
 ## 🚀 API
