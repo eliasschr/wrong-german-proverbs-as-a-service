@@ -6,6 +6,12 @@ Eine kleine API, die zufällige, absichtlich falsche deutsche Sprichwörter zur�
 
 ## 🚀 API
 
+**Gehostete Variante:**
+
+```txt
+https://wrong-german-proverbs-as-a-service.onrender.com/get
+```
+
 **Basis-URL (self-hosted):**
 
 ```txt
